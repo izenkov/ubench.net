@@ -25,6 +25,27 @@ string Bench(this Action[] funcs, int runs = 0, string fmt = null)
  - **fmt**   - output format string (default is null for default formatting)
  - **pad**   - pad right action method name (default is 0 for auto padding)
 
+### Benchmark code as simple as 1-2-3:
+ 
+```c#
+using System;
+using UBench; // 1 Add UBench namespace
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            long i = 2;
+            Action a = () => { i++; };    // 2 Define action
+            Console.WriteLine(a.Bench()); // 3 Benchmark action
+            Console.WriteLine(i);
+        }
+    }
+}
+```
+ 
 ### Usage:
 
 ```c#
