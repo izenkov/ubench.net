@@ -1,6 +1,6 @@
 # UBench.Net micro benchmark v 1.1
  
-Copyright (C) Igor P. Zenkov 2014, 2015
+Copyright (C) 2014, 2015 Igor P. Zenkov
  
 Inspired by Alois Kraus http://geekswithblogs.net/akraus1/archive/2008/12/16/127989.aspx
 and Google Go 'testing' package
