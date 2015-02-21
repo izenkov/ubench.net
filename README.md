@@ -77,9 +77,9 @@ Console.WriteLine(a.Bench(1000));
 
  - **{op}**   - number of operations (runs)
  - **{ms}**   - elapsed time in milliseconds
- - **{s }**   - elapsed time in seconds
+ - **{s}**    - elapsed time in seconds
  - **{opms}** - operations per millisecond 
- - **{ops }** - operations per second
+ - **{ops}**  - operations per second
  - **{nsop}** - nanoseconds per operation
  - **{psop}** - picoseconds per operation
 
@@ -99,4 +99,4 @@ Console.WriteLine(a.Bench(1000));
 
 # License
 
-MIT
+[MIT](LICENSE.md)
