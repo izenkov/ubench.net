@@ -1,23 +1,25 @@
-# UBench.Net micro benchmark v 1.1
- 
-Copyright (C) 2014, 2015 Igor P. Zenkov
+## UBench.Net micro benchmark v 1.1
  
 Inspired by Alois Kraus http://geekswithblogs.net/akraus1/archive/2008/12/16/127989.aspx
 and Google Go 'testing' package
  
-### Implementation:
+#### Implementation
 
 UBench implements Bench() Extension Method
 on Action and Action[] data types. Bench() method
 returns result as string making it i/o agnostic.
 
-### Bench() Method signatures:
+#### NuGet package
+
+[NuGet UBench package](https://www.nuget.org/packages/UBench)
+
+#### Bench() Method signatures
 
 ```c#
 string Bench(this Action func, int runs = 0, string fmt = null, int pad = 0)
 string Bench(this Action[] funcs, int runs = 0, string fmt = null)
 ```
-### Where:
+#### Where
 
  - **func**  - action to benchmark
  - **funcs** - array of actions to benchmark
@@ -25,7 +27,7 @@ string Bench(this Action[] funcs, int runs = 0, string fmt = null)
  - **fmt**   - output format string (default is null for default formatting)
  - **pad**   - pad right action method name (default is 0 for auto padding)
 
-### Benchmark code as simple as 1-2-3:
+#### Benchmark code as simple as 1-2-3
  
 ```c#
 using System;
@@ -46,7 +48,7 @@ namespace ConsoleApplication1
 }
 ```
  
-### Usage:
+#### Usage
 
 ```c#
 static void FuncToBench1() { code to bench is here }
@@ -94,7 +96,7 @@ Action[] a = { FuncToBench1, FuncToBench2, FuncToBench3 };
 Console.WriteLine(a.Bench(1000));
 ```
 
-### Format string tokens:
+#### Format string tokens
 
  - **{op}**   - number of operations (runs)
  - **{ms}**   - elapsed time in milliseconds
@@ -104,20 +106,27 @@ Console.WriteLine(a.Bench(1000));
  - **{nsop}** - nanoseconds per operation
  - **{psop}** - picoseconds per operation
 
-### Predefined format strings aliases:
+#### Predefined format strings aliases
 
  - **"ns"**  -> "{op} op {s} s {nsop} ns/op"
  - **"nsl"** -> "{op} op {s} s {ops} op/s {nsop} ns/op"
  - **"ps"**  -> "{op} op {ms} ms {psop} ps/op"
  - **"psl"** -> "{op} op {ms} ms {opms} op/ms {psop} ps/op"
 
-### Where:
+#### Where
 
  - **"ns"**  - nanoseconds (default)
  - **"nsl"** - nanoseconds long
  - **"ps"**  - picoseconds
  - **"psl"** - picoseconds long
 
-# License
+#### Benchmark projects 
+
+[UBenchDemo](UBenchDemo/README.md)
+[UBenchConsole](UBenchConsole/README.md)
+[UBenchFibonacci](UBenchFibonacci/README.md)
+[UBenchMethod](UBenchMethod/README.md)
+ 
+## License
 
 [MIT](LICENSE.md)

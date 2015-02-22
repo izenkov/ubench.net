@@ -7,7 +7,7 @@ namespace UBenchDemo
 {
     class Program
     {
-        static int int1;
+        static int int1, int2, int3;
 
         // Slow recursive
         static int Fib0(int n)
@@ -46,25 +46,28 @@ namespace UBenchDemo
             return a;
         }
 
-        static void Bench_Fib()
+        static void Bench_Fib(int n)
         {
-            int n1 = int1; // use local variable for speed
-            Action[] a = { () => { int1 = Fib0(n1); }, () => { int1 = Fib1(n1); }, () => { int1 = Fib2(n1); } };
+            Action[] a = { () => { int1 = Fib0(n); }, () => { int2 = Fib1(n); }, () => { int3 = Fib2(n); } };
             Console.WriteLine(a.Bench());
         }
 
         static void Main(string[] args)
         {
             // make sure that compiler optimizer will not substitute int1 with constant
-            int1 = 30;
+            int1 = 5;
             if (args.Length > 0)
                 int1 = Convert.ToInt32(args[0]);
 
-            Console.WriteLine("Running Fibonacci implementation benchmark...\n");
-            Bench_Fib();
+            Console.WriteLine("Running Fibonacci(5) implementation benchmark...\n");
+            Bench_Fib(int1);
+
+            int1 = 30;
+            Console.WriteLine("Running Fibonacci(30) implementation benchmark...\n");
+            Bench_Fib(int1);
 
             // make sure that compiler optimizer keeps int1 till the end
-            Console.WriteLine("int1 = {0}", int1);
+            Console.WriteLine("int1 = {0} int2 = {1} int3 = {2}", int1, int2, int3);
         }
     }
 }
