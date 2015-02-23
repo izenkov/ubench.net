@@ -3,6 +3,14 @@
 Inspired by Alois Kraus http://geekswithblogs.net/akraus1/archive/2008/12/16/127989.aspx
 and Google Go 'testing' package
  
+#### Design goals
+
+ - As simple as possible to use with default parameters in 80% of cases
+ - Compact and simple implementation in one file < 500 lines of code
+ - Can be used directly as .cs file or NuGet package
+ - Return results as string and do not use StdOut in order to be i/o agnostic
+ - Return results in nanoseconds per iteration to be compatible with Google Go 'testing' package
+
 #### Implementation
 
 UBench implements Bench() Extension Method
