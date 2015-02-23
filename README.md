@@ -13,7 +13,7 @@ and Google Go 'testing' package
 
 #### Implementation
 
-UBench implements Bench() Extension Method
+[ubench.cs](UBench/ubench.cs) implements Bench() Extension Method
 on Action and Action[] data types. Bench() method
 returns result as string making it i/o agnostic.
 
