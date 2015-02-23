@@ -55,6 +55,12 @@ namespace ConsoleApplication1
     }
 }
 ```
+
+#### Output
+
+```
+<Main>b__0  500000000 op 1.091 s  2.180 ns/op
+```
  
 #### Usage
 
