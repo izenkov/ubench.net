@@ -3,7 +3,7 @@ using System.Text;
 
 using UBench;
 
-namespace UBenchDemo
+namespace UBenchMethod
 {
     class Program
     {

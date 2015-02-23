@@ -1,32 +1,63 @@
 ﻿using System;
 using System.Text;
+using System.Numerics;
 
 using UBench;
 
-namespace UBenchDemo
+namespace UBenchFibonacci
 {
     class Program
     {
-        static int int1, int2, int3;
+        static int N;
+        static int I0, I1, I2, I3;
+        static BigInteger B0, B1;
 
-        // Slow recursive
-        static int Fib0(int n)
+        // Slow recursive algorithm
+        static int FibRecursive(int n)
         {
             if (n <= 1)
                 return n;
-            return Fib0(n - 1) + Fib0(n - 2);
+            return FibRecursive(n - 1) + FibRecursive(n - 2);
         }
 
-        // Slow recursive alternative
-        static int Fib1(int n)
+        // Slow recursive alternative algorithm
+        static int FibRecursiveAlt(int n)
         {
             if (n <= 2)
                 return 1;
-            return Fib1(n - 1) + Fib1(n - 2);
+            return FibRecursiveAlt(n - 1) + FibRecursiveAlt(n - 2);
+        }
+
+        // Fast dynamic algorithm
+        static int FibDynamic(int n)
+        {
+            int a = 0;
+            int b = 1;
+            for (int i = 0; i < n; i++)
+            {
+                int c = a + b;
+                a = b;
+                b = c;
+            }
+            return a;
+        }
+
+        // Fast dynamic algorithm using BigInteger
+        static BigInteger FibDynamicBigInt(int n)
+        {
+            BigInteger a = BigInteger.Zero;
+            BigInteger b = BigInteger.One;
+            for (long i = 0; i < n; i++)
+            {
+                BigInteger c = a + b;
+                a = b;
+                b = c;
+            }
+            return a;
         }
 
         // Fast doubling algorithm
-        static int Fib2(int n)
+        static int FibDoubling(int n)
         {
             int a = 0;
             int b = 1;
@@ -46,28 +77,69 @@ namespace UBenchDemo
             return a;
         }
 
+        // Fast doubling algorithm using BigInteger
+        static BigInteger FibDoublingBigInt(int n)
+        {
+            BigInteger a = BigInteger.Zero;
+            BigInteger b = BigInteger.One;
+            for (int i = 31; i >= 0; i--)
+            {
+                BigInteger d = a * (b * 2 - a);
+                BigInteger e = a * a + b * b;
+                a = d;
+                b = e;
+                if ((((uint)n >> i) & 1) != 0)
+                {
+                    BigInteger c = a + b;
+                    a = b;
+                    b = c;
+                }
+            }
+            return a;
+        }
+
+        static void Recursive()      { I0 = FibRecursive(N); }
+        static void RecursiveAlt()   { I1 = FibRecursiveAlt(N); }
+        static void Dynamic()        { I2 = FibDynamic(N); }
+        static void Doubling()       { I3 = FibDoubling(N); }
+        static void DynamicBigInt()  { B0 = FibDynamicBigInt(N); }
+        static void DoublingBigInt() { B1 = FibDoublingBigInt(N); }
+
         static void Bench_Fib(int n)
         {
-            Action[] a = { () => { int1 = Fib0(n); }, () => { int2 = Fib1(n); }, () => { int3 = Fib2(n); } };
+            N = n;
+            Action[] a = { Recursive, RecursiveAlt, Dynamic, Doubling, DynamicBigInt, DoublingBigInt };
+            Console.WriteLine("Running Fibonacci({0}) implementations benchmark...\n", n);
+            Console.WriteLine(a.Bench());
+        }
+
+        static void Bench_FibBigInt(int n)
+        {
+            N = n;
+            Action[] a = { DynamicBigInt, DoublingBigInt };
+            Console.WriteLine("Running Fibonacci({0}) fast BigInteger implementations benchmark...\n", n);
             Console.WriteLine(a.Bench());
         }
 
         static void Main(string[] args)
         {
             // make sure that compiler optimizer will not substitute int1 with constant
-            int1 = 5;
             if (args.Length > 0)
-                int1 = Convert.ToInt32(args[0]);
+                N = Convert.ToInt32(args[0]);
 
-            Console.WriteLine("Running Fibonacci(5) implementation benchmark...\n");
-            Bench_Fib(int1);
+            Bench_Fib(2);
+            Bench_Fib(5);
+            Bench_Fib(10);
+            Bench_Fib(30);
 
-            int1 = 30;
-            Console.WriteLine("Running Fibonacci(30) implementation benchmark...\n");
-            Bench_Fib(int1);
+            Console.WriteLine("I0 = {0} I1 = {1} I2 = {2} I3 = {3} B0 = {4} B1 = {5}\n", I0, I1, I2, I3, B0, B1);
 
-            // make sure that compiler optimizer keeps int1 till the end
-            Console.WriteLine("int1 = {0} int2 = {1} int3 = {2}", int1, int2, int3);
+            Bench_FibBigInt(50);
+            Bench_FibBigInt(100);
+            Bench_FibBigInt(200);
+            Bench_FibBigInt(500);
+
+            Console.WriteLine("B0 = {0} B1 = {1}\n", B0, B1);
         }
     }
 }
