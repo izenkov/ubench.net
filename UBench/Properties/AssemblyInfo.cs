@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("UBench")]
-[assembly: AssemblyDescription("UBench micro benchmark")]
+[assembly: AssemblyTitle("UBench.Net")]
+[assembly: AssemblyDescription("UBench is a simple yet powerful microbenchmark implementation. Just invoke Bench() extension method on Action or Action[] types")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Igor P. Zenkov")]
 [assembly: AssemblyProduct("UBench")]
-[assembly: AssemblyCopyright("Copyright © Igor P. Zenkov 2014, 2015")]
+[assembly: AssemblyCopyright("Copyright © 2014, 2015, 2016 Igor P. Zenkov")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.0.0.1")]
-[assembly: AssemblyFileVersion("1.0.0.1")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]

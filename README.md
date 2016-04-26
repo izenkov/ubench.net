@@ -1,4 +1,4 @@
-## UBench.Net micro benchmark v 1.1
+## UBench.Net micro benchmark v 1.2
  
 Inspired by Alois Kraus http://geekswithblogs.net/akraus1/archive/2008/12/16/127989.aspx
 and Google Go 'testing' package
@@ -9,7 +9,7 @@ and Google Go 'testing' package
  - Compact and simple implementation in one file < 500 lines of code
  - Can be used directly as .cs file or NuGet package
  - Return results as string and do not use StdOut in order to be i/o agnostic
- - Return results in nanoseconds per iteration to be compatible with Google Go 'testing' package
+ - Return results in nanoseconds per iteration so that different languages/platforms can be compared
 
 #### Implementation
 
@@ -140,6 +140,11 @@ Console.WriteLine(a.Bench(1000));
  - [UBenchConsole](UBenchConsole/README.md)
  - [UBenchFibonacci](UBenchFibonacci/README.md)
  - [UBenchMethod](UBenchMethod/README.md)
+ - [UBenchForeach](UBenchForeach/README.md)
+
+## History
+
+[History](HISTORY.md)
  
 ## License
 

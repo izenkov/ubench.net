@@ -1,7 +1,7 @@
 ﻿/*
- * UBench micro benchmark v 1.1
+ * UBench micro benchmark v 1.2
  * 
- * Copyright (C) 2014, 2015 Igor P. Zenkov
+ * Copyright (C) 2014, 2015, 2016 Igor P. Zenkov
  * 
  * Inspired by Alois Kraus http://geekswithblogs.net/akraus1/archive/2008/12/16/127989.aspx
  * and Google Go 'testing' package
@@ -98,11 +98,20 @@
  */
 
 using System;
+using System.Reflection;
 using System.Text;
 using System.Diagnostics;
 
 namespace UBench
 {
+    /// <summary>
+    /// Custom attribute, UBench method alias.
+    /// </summary>
+    public class UBenchAttribute : Attribute
+    {
+        public string Alias { get; set; }
+    }
+
     /// <summary>
     /// Helper class to output performance related data like number of runs,
     /// elapsed time, frequency, and nanoseconds per run.
@@ -204,6 +213,17 @@ namespace UBench
 
             return fname + fmt; // custom
         }
+        
+        private static string GetMethodDescr(MethodInfo mi)
+        {
+            var desc = mi.Name;
+
+            var attributes = (UBenchAttribute[])mi.GetCustomAttributes(typeof(UBenchAttribute), true);
+            if (attributes.Length > 0)
+                desc = attributes[0].Alias;
+
+            return desc;
+        }
 
         /// <summary>
         /// Execute given function and output timing values to string.
@@ -271,7 +291,7 @@ namespace UBench
         /// <param name="pad">Pad right function name with spaces
         public static string Bench(this Action func, int runs = 0, string fmt = null, int pad = 0)
         {
-            string fmtStr = GetFmtStr(func.Method.Name.PadRight(pad), fmt);
+            string fmtStr = GetFmtStr(GetMethodDescr(func.Method).PadRight(pad), fmt);
 
             // calculate runs if not provided
             if (runs == 0)
@@ -304,9 +324,12 @@ namespace UBench
         public static string Bench(this Action[] funcs, int runs = 0, string fmt = null)
         {
             int len, maxLen = 0;
+            string desc;
+
             for (int i = 0; i < funcs.Length; i++)
             {
-                len = funcs[i].Method.Name.Length;
+                desc = GetMethodDescr(funcs[i].Method);
+                len = desc.Length;
                 if (len > maxLen)
                     maxLen = len;
             }

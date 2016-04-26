@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>UBench</id>
+    <version>1.2.0</version>
+    <title>UBench.Net</title>
+    <authors>Igor P. Zenkov</authors>
+    <owners>Igor P. Zenkov</owners>
+    <licenseUrl>https://github.com/izenkov/ubench.net/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/izenkov/ubench.net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>UBench is a simple yet powerful microbenchmark implementation. Just invoke Bench() extension method on Action or Action[] types.</description>
+    <copyright>Copyright © 2014, 2015, 2016 Igor P. Zenkov</copyright>
+    <language>en-US</language>
+    <tags>ubench bench benchmark performance speed zenkov</tags>
+  </metadata>
+</package>
